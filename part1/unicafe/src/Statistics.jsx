@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 
-import StatisticLine from "./StatisticLine"
-
 const Statistics = ({ feedbacks }) => {
     const { good, neutral, bad } = feedbacks
     const all = good + neutral + bad
@@ -13,14 +11,35 @@ const Statistics = ({ feedbacks }) => {
         <h1>statistics</h1>
         {all === 0? 
         <h3>No feedback given</h3>:
-        <div>
-            <StatisticLine text={"good"} value={good} />
-            <StatisticLine text={"neutral"} value={neutral} />
-            <StatisticLine text={"bad"} value={bad} />
-            <StatisticLine text={"all"} value={all} />
-            <StatisticLine text={"average"} value={average} />
-            <StatisticLine text={"positive"} value={`${positive} %`} />
-        </div>}
+        <table>
+            <tbody>
+                <tr>
+                    <td>good</td>
+                    <td>{good}</td>
+                </tr>
+                <tr>
+                    <td>neutral</td>
+                    <td>{neutral}</td>
+                </tr>
+                <tr>
+                    <td>bad</td>
+                    <td>{bad}</td>
+                </tr>
+                <tr>
+                    <td>all</td>
+                    <td>{all}</td>
+                </tr>
+                <tr>
+                    <td>average</td>
+                    <td>{average}</td>
+                </tr>
+                <tr>
+                    <td>positive</td>
+                    <td>{positive} %</td>
+                </tr>
+            </tbody>
+        </table>
+        }
     </div>
   )
 }
