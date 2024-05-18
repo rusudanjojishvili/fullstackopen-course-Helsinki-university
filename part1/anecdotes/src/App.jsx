@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import MostVoted from './MostVoted'
+import ChosenToday from './ChosenToday'
 
 const App = () => {
   const anecdotes = [
@@ -13,19 +15,31 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState(Array(anecdotes.length).fill(0))
 
   const handleGenerateNext = () => {
-    const anecdotesCopy = [...anecdotes]
-    const randomIndex = Math.floor(Math.random() * anecdotesCopy.length)
+    const randomIndex = Math.floor(Math.random() * anecdotes.length)
     setSelected(randomIndex)
   }
 
+  const handleVote = (index) => {
+    const pointsCopy = [...points]
+    pointsCopy[index] += 1
+    setPoints(pointsCopy)
+  }
+
+  const chosenTodayProps = {
+    anecdotes, 
+    selected, 
+    points, 
+    handleVote, 
+    handleGenerateNext
+  }
+  
   return (
     <div>
-      {anecdotes[selected]}
-      <div>
-        <button onClick={handleGenerateNext}>next anecdote</button>
-      </div>
+      <ChosenToday {...chosenTodayProps}/>
+      <MostVoted anecdotes={anecdotes} points={points} />
     </div>
   )
 }
